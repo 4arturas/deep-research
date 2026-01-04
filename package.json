@@ -1,0 +1,36 @@
+{
+  "name": "deep-research",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpx @langchain/langgraph-cli dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4arturas/deep-research.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@langchain/classic": "^1.0.7",
+    "@langchain/community": "^1.1.1",
+    "@langchain/core": "^1.1.8",
+    "@langchain/google-genai": "^2.1.3",
+    "@langchain/langgraph": "^1.0.7",
+    "@langchain/langgraph-cli": "^1.1.2",
+    "@langchain/ollama": "^1.1.0",
+    "@langchain/tavily": "^1.2.0",
+    "convex": "^1.31.2",
+    "dayjs": "^1.11.19",
+    "langchain": "^1.2.3",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.25.1"
+  },
+  "bugs": {
+    "url": "https://github.com/4arturas/deep-research/issues"
+  },
+  "homepage": "https://github.com/4arturas/deep-research#readme"
+}

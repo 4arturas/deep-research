@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "."
+  ],
+  "graphs": {
+    "simple-node": "simple-node.js:graph"
+  },
+  "env": ".env"
+}
