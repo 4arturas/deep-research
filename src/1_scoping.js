@@ -264,13 +264,6 @@ async function runLocalScopingEvaluation(graph) {
                 messages: testCase.input.messages
             };
 
-            console.log("\nRunning success criteria evaluation...");
-            const successResult = await evaluateSuccessCriteria(runInput, runOutput);
-            console.log(`Success Criteria Score: ${successResult.score} (${successResult.reason})`);
-
-            console.log("\nRunning hallucination evaluation...");
-            const hallucinationResult = await evaluateHallucination(runInput, runOutput);
-            console.log(`Hallucination Score: ${hallucinationResult.score} (${hallucinationResult.reason})`);
 
             console.log("-----\n");
 
