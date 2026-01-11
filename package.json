@@ -21,6 +21,7 @@
     "@langchain/google-genai": "^2.1.3",
     "@langchain/langgraph": "^1.0.7",
     "@langchain/langgraph-cli": "^1.1.2",
+    "@langchain/mcp-adapters": "^1.1.1",
     "@langchain/ollama": "^1.1.0",
     "@langchain/tavily": "^1.2.0",
     "convex": "^1.31.2",
@@ -32,5 +33,6 @@
   "bugs": {
     "url": "https://github.com/4arturas/deep-research/issues"
   },
-  "homepage": "https://github.com/4arturas/deep-research#readme"
+  "homepage": "https://github.com/4arturas/deep-research#readme",
+  "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6"
 }

@@ -117,14 +117,6 @@ async function tool_node( state )
                 const obs = await tool.invoke(call.args);
                 content = String(obs);
             } catch (err) {
-                /*
-                TODO: fix this error:
-                {
-  "output": "{\"paths\":\"['https://www.coffeereview.com/listing/san-francisco', 'https://specialtycoffeemanual.com/city-guides/san-francisco/', 'https://www.yelp.com/topics/san-francisco/coffee']\"}"
-  "Error: Received tool input did not match expected schema\n    at DynamicStructuredTool.call (file:///C:/Users/4artu/IdeaProjects/deep-research/node_modules/@langchain/core/dist/tools/index.js:121:11)\n    at DynamicStructuredTool.call (file:///C:/Users/4artu/IdeaProjects/deep-research/node_modules/@langchain/core/dist/tools/index.js:238:16)\n    at DynamicStructuredTool.invoke (file:///C:/Users/4artu/IdeaProjects/deep-research/node_modules/@langchain/core/dist/tools/index.js:92:15)\n    at file:///C:/Users/4artu/IdeaProjects/deep-research/src/3_research_agent_mcp.js:114:40\n    at Array.map (<anonymous>)\n    at RunnableCallable.tool_node [as func] (file:///C:/Users/4artu/IdeaProjects/deep-research/src/3_research_agent_mcp.js:110:19)\n    at file:///C:/Users/4artu/IdeaProjects/deep-research/node_modules/@langchain/langgraph/dist/utils.js:39:108\n    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)\n    at AsyncLocalStorageProvider.runWithConfig (file:///C:/Users/4artu/IdeaProjects/deep-research/node_modules/@langchain/core/dist/singletons/async_local_storage/index.js:47:18)\n    at RunnableCallable.invoke (file:///C:/Users/4artu/IdeaProjects/deep-research/node_modules/@langchain/langgraph/dist/utils.js:39:63)"
-  Received tool input did not match expected schema
-}
-                 */
                 content = `Error: ${err.message}`
             }
             return new ToolMessage({

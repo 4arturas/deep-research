@@ -1,6 +1,7 @@
 // Model constants
 export const MODEL_EMBEDDING = "mxbai-embed-large";
 export const MODEL_AGENT = "llama3.2:3b";
+export const MODEL_LLAMA = "llama3:8b";
 export const MODEL_GENERATION = "deepseek-r1:8b";
 export const MODEL_GEMMA_3_4b = "gemma3:4b";
 export const MODEL_GEMMA_3_27b_CLOUD = "gemma3:27b-cloud";
