@@ -11,16 +11,6 @@ export const MODEL_QWEN = "qwen2.5:7b";
 export const MODEL_QWEN_2_5_CODER_7b = "qwen2.5-coder:7b";
 export const MODEL_QWEN3_CODER_480b_CLOUD = "qwen3-coder:480b-cloud";
 
-// Node names
-export const NODE_AGENT = "agent";
-export const NODE_RETRIEVE = "retrieve";
-export const NODE_RELEVANCE = "gradeRelevance";
-export const NODE_TRANSFORM = "transformQuery";
-export const NODE_GENERATE = "generate";
-
-// Tool names
-export const TOOL_RETRIEVER = "retrieve_blog_posts";
-export const TOOL_GRADE = "give_relevance_score";
 
 // Decision constants
 export const DECISION_RELEVANT = "yes";
