@@ -13,16 +13,6 @@ const model = new ChatOllama({
     format: "json"
 });
 
-const ClarifyWithUserSchema = z.object({
-    need_clarification: z.boolean(),
-    question: z.string(),
-    verification: z.string()
-});
-
-const ResearchQuestionSchema = z.object({
-    research_brief: z.string()
-});
-
 const AgentStateAnnotation = Annotation.Root({
     messages: Annotation({
         reducer: (x, y) => x.concat(y),
@@ -35,14 +25,18 @@ const AgentStateAnnotation = Annotation.Root({
 const getTodayStr = () => dayjs().format('ddd MMM DD, YYYY');
 
 async function clarify_with_user(state) {
-    const structuredLlm = model.withStructuredOutput(ClarifyWithUserSchema);
-
     const date = getTodayStr();
     const messages = getBufferString(state.messages);
 
     const prompt = clarify_with_user_instructions
         .replace("{date}", date)
         .replace("{messages}", messages);
+
+    const structuredLlm = model.withStructuredOutput(z.object({
+        need_clarification: z.boolean(),
+        question: z.string(),
+        verification: z.string()
+    }));
 
     const response = await structuredLlm.invoke([
         new HumanMessage(prompt)
@@ -65,13 +59,15 @@ async function clarify_with_user(state) {
 }
 
 async function write_research_brief(state) {
-    const structuredLlm = model.withStructuredOutput(ResearchQuestionSchema);
-
     const date = getTodayStr();
     const messages = getBufferString(state.messages);
     const prompt = transform_messages_into_research_topic_prompt
         .replace("{date}", date)
         .replace("{messages}", messages);
+
+    const structuredLlm = model.withStructuredOutput(z.object({
+        research_brief: z.string()
+    }));
 
     const response = await structuredLlm.invoke([
         new HumanMessage(prompt)
@@ -98,6 +94,21 @@ const graph = new StateGraph(AgentStateAnnotation)
         checkpointer: memory
     });
 
+
+async function run(input) {
+    // Convert input messages to the appropriate message types
+    const convertedInput = {
+        messages: input.messages.map(msg =>
+            msg.type === 'human' ? new HumanMessage(msg.content) : new AIMessage(msg.content)
+        )
+    };
+
+    const result = await graph.invoke(convertedInput, {
+        configurable: { thread_id: `scoping-${Date.now()}` }
+    });
+
+    return result;
+}
 
 async function runLocalScopingEvaluation(graph) {
     const testCases = [
@@ -141,5 +152,33 @@ async function runLocalScopingEvaluation(graph) {
         }
     }
 }
+// Export the run function for use in other modules
+export { run };
 
-runLocalScopingEvaluation(graph).catch(console.error);
+// Example usage of the run function
+async function exampleRun() {
+    console.log("Running example scoping workflow...");
+
+    // Example 1: Initial research request that needs clarification
+    const result1 = await run({
+        messages: [
+            { type: 'human', content: 'I want to research the best coffee shops in San Francisco.' }
+        ]
+    });
+
+    console.log("Result 1:", result1);
+
+    // Example 2: Follow-up with clarification
+    const result2 = await run({
+        messages: [
+            { type: 'human', content: 'I want to research the best coffee shops in San Francisco.' },
+            { type: 'ai', content: 'Could you clarify what criteria are most important for determining the "best" coffee shops?' },
+            { type: 'human', content: 'Let\'s examine coffee quality to assess the best coffee shops in San Francisco.' }
+        ]
+    });
+
+    console.log("Result 2:", result2);
+}
+
+// Run the example
+exampleRun().catch(console.error);
