@@ -1,8 +1,4 @@
 export const clarify_with_user_instructions = ` 
-"""Prompt templates for the deep research system. 
-This module contains all prompt templates used across the research workflow components, 
-including user clarification, research brief generation, and report synthesis. 
-""" 
 These are the messages that have been exchanged so far from the user asking for the report: 
 <Messages> 
 {messages} 
@@ -99,7 +95,7 @@ Think like a human researcher with limited time. Follow these steps:
 - Your last 2 searches returned similar information 
 </Hard Limits> 
 <Show Your Thinking> 
-After each search tool call, use think_tool to analyze the results: 
+After each tavily_search tool call, use think_tool to analyze the results: 
 - What key information did I find? 
 - What's missing? 
 - Do I have enough to answer the question comprehensively? 
